@@ -1,0 +1,71 @@
+﻿@model work_with_multiple_table.Models.ViewModel.EmployeeDepartmentSummaryView
+
+<form method="post" asp-action="Create" asp-controller="Employee">
+    <div class="border p-5 mt-5">
+        <div class="row pb-1">
+            <h2 class="text-primary">Create Employee</h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="name"></label>
+            <input asp-for="name" class="form-control" />
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="age"></label>
+            <input asp-for="age" class="form-control" />
+            <span asp-validation-for="age" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3" style="display: none;">
+            <label asp-for="deptname"></label>
+            <input asp-for="deptname" class="form-control" id="deptnameHidden" />
+            <span asp-validation-for="deptname" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="gender" class="mb-3"></label><br />
+            <label>
+                <input type="radio" asp-for="gender" class="form-check-input" value="Male" /> Male
+            </label>
+            <label>
+                <input type="radio" asp-for="gender" class="form-check-input" value="Female" /> Female
+            </label>
+            <label>
+                <input type="radio" asp-for="gender" class="form-check-input" value="Other" /> Other
+            </label>
+            <span class="text-danger" asp-validation-for="gender"></span>
+        </div>
+
+        <div class="form-group col-lg-6 mt-2 mb-3">
+            <label asp-for="DepartmentId"></label>
+            <select asp-for="DepartmentId" class="form-control" id="departmentSelect">
+                <option value="0">--Select Department--</option>
+                @foreach (var dep in ViewBag.department)
+                {
+                    <option value="@dep.DepartmentId">@dep.deptname</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="DepartmentId"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="DateofBirth"></label>
+            <input asp-for="DateofBirth" class="form-control" />
+            <span asp-validation-for="DateofBirth" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+<script>
+    document.getElementById('departmentSelect').addEventListener('change', function () {
+        var selectedOption = this.options[this.selectedIndex];
+        document.getElementById('deptnameHidden').value = selectedOption.text;
+    });
+</script>

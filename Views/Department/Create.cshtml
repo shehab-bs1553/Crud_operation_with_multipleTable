@@ -1,0 +1,32 @@
+﻿@model Department
+
+<form method="post">
+    <div class="border p-5 mt-5">
+        <div class="row pb-1">
+            <h2 class="text-primary">Create Department</h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-4">
+            <label asp-for="deptname"></label>
+            <input asp-for="deptname" class="form-control" />
+            <span asp-validation-for="deptname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="location"></label>
+            <input asp-for="location" class="form-control" />
+            <span asp-validation-for="location" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="deptcode"></label>
+            <input asp-for="deptcode" class="form-control" />
+            <span asp-validation-for="deptcode" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Department" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
